@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/font-awesome.min.css" rel="stylesheet">
+		<link href="css/social-buttons-3.css" rel="stylesheet">
+		<style>
+			html,
+			body {
+			  height: 100%;
+			}
+			
+			#wrap {
+			  min-height: 100%;
+			  height: auto;
+			  margin: 0 auto -80px;
+			  padding: 0 0 80px;
+			}
+			
+			#footer {
+			  height: 80px;
+			  background-color: #f5f5f5;
+			}
+			#footer .container{
+				padding: 25px 0px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div class="container">
+				<div class="page-header">
+					<h1>SMS.db analyser</h1>
+				</div>
+				<div class="col-lg-4">
+					<h2>Stats:</h2>
+					<p>You have sent <h4><span id="textcount"></span> texts/iMessages</h4></p>
+					<br>
+					<p>Which in total consisted of <h4><span id="wordcount"></span> words</h4></p>
+					<br>
+					<p>That's an average of <h4><span id="wordpertext"></span> words per text</h4></p>
+					<br>
+					<button class="btn btn-lg btn-twitter" id="tweet"><i class="fa fa-twitter"></i> Tweet these stats</button>
+				</div>
+				<div class="col-lg-4">
+					<h2>Your most popular words:</h2>
+					<table class="table">
+						<thead>
+							<th>Word</th>
+							<th>Count</th>
+						</thead>
+						<tbody id="words">
+						</tbody>
+					</table>
+				</div>
+				<div class="col-lg-4">
+					<h2>Your most popular ngrams where n=2:</h2>
+					<table class="table">
+						<thead>
+							<th>Ngram</th>
+							<th>Count</th>
+						</thead>
+						<tbody id="ngrams">
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div id="footer">
+			<div class="container">
+				<p>Hacked together by <a href="http://joshbalfour.co.uk">Josh Balfour</a>. It's not meant to be optimised/efficient/neatly written, it's meant to work.</p>
+			</div>
+		</div>
+		<script src="data.json"></script>
+		<script>
+			
+			function populateTableFromDataWithLimit(table,data,limit,callback){
+				for (var i=0; i<limit; i++){
+					var tr = document.createElement("tr");
+					var td1 = document.createElement("td");
+					td1.innerText = data[i][0];
+					var td2 = document.createElement("td");
+					td2.innerText = data[i][1].toLocaleString();;
+					tr.appendChild(td1);
+					tr.appendChild(td2);
+					
+					table.appendChild(tr);
+				}
+			}
+			
+			var limit = 10;
+			
+			var wordTable = document.getElementById("words");
+			var words = data[0];
+			
+			populateTableFromDataWithLimit(wordTable,words,limit);
+			
+			var ngramTable = document.getElementById("ngrams");
+			var ngrams = data[1];
+			
+			populateTableFromDataWithLimit(ngramTable,ngrams,limit);
+			
+			var textsCount = data[2];
+			var wordsCount = data[3];
+			document.getElementById("textcount").innerText = textsCount.toLocaleString();
+			document.getElementById("wordcount").innerText = wordsCount.toLocaleString();
+			
+			var average =wordsCount/textsCount;
+			average = average.toFixed(2);
+			document.getElementById("wordpertext").innerText = average;
+
+			function tweetSummary(){
+				var status = "I've sent "+textsCount.toLocaleString()+" texts/iMessages consisting of "+wordsCount.toLocaleString()+" which makes an average of "+average+" words/text!";
+				var url = "http://twitter.com/home?status="+status;
+				window.open(url);
+			}
+			document.getElementById("tweet").onclick = tweetSummary;
+		</script>
+	</body>
+</html>
