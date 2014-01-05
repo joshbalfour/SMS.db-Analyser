@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
+		<title>SMS.db analyser</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/font-awesome.min.css" rel="stylesheet">
 		<link href="css/social-buttons-3.css" rel="stylesheet">
@@ -110,7 +111,7 @@
 			document.getElementById("wordpertext").innerText = average;
 
 			function tweetSummary(){
-				var status = "I've sent "+textsCount.toLocaleString()+" texts/iMessages consisting of "+wordsCount.toLocaleString()+" which makes an average of "+average+" words/text!";
+				var status = "I've sent "+textsCount.toLocaleString()+" texts/iMessages consisting of "+wordsCount.toLocaleString()+" which makes an average of "+average+" words/text! Found out with http://joshbalfour.co.uk/sms/";
 				var url = "http://twitter.com/home?status="+status;
 				window.open(url);
 			}
