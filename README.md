@@ -42,21 +42,22 @@ How to Use:
 
      success
  5. Open the index.html file in Chrome
- 6. See your stats!
+ 6. See your stats!  
 
 Notes
-------
+-----------
  1. If you want to change it or whatever feel free,  if you do I'd be interested to hear about what you make with it!
- 2. This does not call home to anything, you can run this offline and it'll work perfectly fine
+ 2. This does not call home to anything, you can run this offline and it'll work perfectly fine  
+
 Uses
------
+-----------
 
  1. [Bootstrap][5]
  2. [FontAwesome][6]
- 3. [Social Buttons for Twitter Bootstrap 3][7]
+ 3. [Social Buttons for Twitter Bootstrap 3][7]  
 
 License
--------
+-----------
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
